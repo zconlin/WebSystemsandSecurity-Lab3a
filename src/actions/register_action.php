@@ -14,5 +14,11 @@ if ($conn->connect_error) {
 }
 
 // TODO: Register a new user
-
+if (/* database connected */) {
+    if (/* passwords match */) {
+        if (/* username isn't taken */) {
+            /* Do register */
+        }
+    }
+}
 ?>
