@@ -14,11 +14,17 @@ if ($conn->connect_error) {
 }
 
 // TODO: Register a new user
-if (/* database connected */) {
-    if (/* passwords match */) {
-        if (/* username isn't taken */) {
-            /* Do register */
-        }
-    }
+if ($conn != true) {/* database NOT connected */
+	console.log("connected")
+	die()
+}
+// if (/* passwords DONT match */) {
+// 	die()
+// }
+if ($mysql_user == "SELECT username FROM users") { /* username IS taken */
+	/* Do (opposite of) register */
+	console.log('nice')
+
+	die()
 }
 ?>

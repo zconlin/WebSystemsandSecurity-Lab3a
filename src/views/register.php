@@ -22,18 +22,21 @@
 
             <form action="registration_form.php" method="POST">
 
-                 First name:
-                <input type="text" name="firstname">
+                Username:
+                <input type="text" name="username"> <br>
                 
-                <br> Last name:
-                <input type="text" name="lastname">
-                
+                Password:
+                <input type="password" name="password"> <br>
+
+                Confirm Password:
+                <input type="password" name="confirmPassword"> <br>        
+
 			<input type="hidden" name="form_submitted" value="1" />
 
                 <input type="submit" value="Submit">
 
             </form>
 
-      <?php endif; ? > 
+      <?php endif; ?> 
 </body> 
 </html>
