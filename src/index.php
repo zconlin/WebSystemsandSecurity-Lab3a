@@ -30,7 +30,7 @@
   <nav>
     <a href="https://www.byu.edu">Visit byu.edu!</a>
     <form action="actions/logout_action.php">
-    <input class="logout-button" type="submit" value="Logout"><br></form>
+    <input class="logout-button" type="submit" value="Logout" required><br></form>
   </nav>
 
   <h1 font-family: Sofia, sans-serif>To Do List</h1>
