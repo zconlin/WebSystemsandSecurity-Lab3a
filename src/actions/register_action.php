@@ -19,7 +19,7 @@ if ($conn->connect_error) {
 
 if($_POST['passwordRegister'] != $_POST['passwordConfirm']) {
 	$_SESSION["passwordError"] = "Passwords don't match";
-	header("Location: /views/register.php");
+	header("Location: ../views/register.php");
 	die("Passwords do not match");
 }
 
