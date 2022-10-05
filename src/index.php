@@ -1,5 +1,10 @@
 <?php error_reporting(-1);
-session_start()?>
+      session_start();
+    if (!isset($_SESSION['logged_in'])) {
+      header("Location: views/login.php");
+    }  
+    echo var_dump($_SESSION["id"], $_SESSION["username"], $_SESSION["logged_in"]);
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,10 +23,14 @@ session_start()?>
 </head>
 
 <body>
+
+
   <!-- Your visible elements -->
   <!-- Navigation bar -->
   <nav>
     <a href="https://www.byu.edu">Visit byu.edu!</a>
+    <form action="actions/logout_action.php">
+    <input class="logout-button" type="submit" value="Logout"><br></form>
   </nav>
 
   <h1 font-family: Sofia, sans-serif>To Do List</h1>

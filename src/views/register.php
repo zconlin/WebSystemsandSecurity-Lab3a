@@ -1,42 +1,27 @@
-<html>
-<head>
-	<title>Registration Form</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<?php
+session_start();
 
-</head>
-<body>
+echo $_SESSION["passwordError"];
+unset($_SESSION["passwordError"]);
+echo $_SESSION["usernameError"];
+unset($_SESSION["usernameError"]);
+?>
 
-    <?php if (isset($_POST['form_submitted'])): ?> 
+<h2>Register New User</h2>
 
-        <h2>Thank You <?php echo $_POST['firstname']; ?> </h2>
+<form method="post" action="/actions/register_action.php">
 
-        <p>You have been registered as
-            <?php echo $_POST['username']; ?>
-        </p>
+    Username:
+    <input type="text" name = "usernameRegister" required><br>
+    
+    Password:
+    <input type="text" name = "passwordRegister" required><br>
 
-        <p>Go <a href="/registration_form.php">back</a> to the form</p>
+    Confirm Password:
+    <input type="text" name = "passwordConfirm" required><br>
 
-        <?php else: ?>
+    <input type="hidden" name="form_submitted" value="1" />
 
-            <h2>Registration Form</h2>
+    <input type="submit" value="Submit">
 
-            <form action="registration_form.php" method="POST">
-
-                Username:
-                <input type="text" name="username"> <br>
-                
-                Password:
-                <input type="password" name="password"> <br>
-
-                Confirm Password:
-                <input type="password" name="confirmPassword"> <br>        
-
-			<input type="hidden" name="form_submitted" value="1" />
-
-                <input type="submit" value="Submit">
-
-            </form>
-
-      <?php endif; ?> 
-</body> 
-</html>
+</form>

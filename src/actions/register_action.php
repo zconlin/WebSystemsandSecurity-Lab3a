@@ -1,5 +1,6 @@
 <?php
-// ./actions/register_action.php
+session_start();
+// ./actions/register_action.phpx
 
 // Read variables and create connection
 $mysql_servername = getenv("MYSQL_SERVERNAME");
@@ -14,17 +15,49 @@ if ($conn->connect_error) {
 }
 
 // TODO: Register a new user
-if ($conn != true) {/* database NOT connected */
-	console.log("connected")
-	die()
-}
-// if (/* passwords DONT match */) {
-// 	die()
-// }
-if ($mysql_user == "SELECT username FROM users") { /* username IS taken */
-	/* Do (opposite of) register */
-	console.log('nice')
+// prepare and bind
 
-	die()
+if($_POST['passwordRegister'] != $_POST['passwordConfirm']) {
+	$_SESSION["passwordError"] = "Passwords don't match";
+	header("Location: /views/register.php");
+	die("Passwords do not match");
 }
+
+$stmt = $conn->prepare("SELECT username FROM user");
+$stmt->execute();
+$stmt->bind_result($nameValue);
+$nameIsTrue = false;
+while($row = $stmt->fetch()){
+	if($nameValue == $_POST["usernameRegister"]){
+		$nameIsTrue = true;
+	}
+}
+$stmt->close();
+
+if($nameIsTrue){
+	$_SESSION["usernameError"] = "Username already exists";
+	header("Location: /views/register.php");
+	die();
+}
+
+$username = $_POST["usernameRegister"];
+$hashed = password_hash($_POST["passwordRegister"], PASSWORD_DEFAULT);
+
+$stmt = $conn->prepare("INSERT INTO `user`(`username`, `password`, `logged_in`) VALUES (?,?,'1')");
+$stmt->bind_param("ss", $username, $hashed);
+$stmt->execute();
+$stmt->close();
+
+$_SESSION["logged_in"] = 'yes';
+$_SESSION["username"] = $username;
+$stmt = $conn->prepare("SELECT `id` FROM user WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$stmt->bind_result($id);
+$stmt->fetch();
+$_SESSION["id"] = $id;
+$stmt->close();
+header("Location: ../index.php");
+die();
+
 ?>

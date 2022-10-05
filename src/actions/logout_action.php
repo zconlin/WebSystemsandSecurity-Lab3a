@@ -1,5 +1,6 @@
 <?php
-// ./actions/logout_action.php
+session_start();
+//./actions/logout_action.php
 
 // Read variables and create connection
 $mysql_servername = getenv("MYSQL_SERVERNAME");
@@ -13,6 +14,18 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
+$stmt = $conn->prepare("UPDATE `user` SET `logged_in` = 0 WHERE id = ?");
+$stmt->bind_param("i", $_SESSION["id"]);
+$stmt->execute();
+$stmt->close();
+
 // TODO: Log the user out
 
+unset($_SESSION["username"]);
+unset($_SESSION["logged_in"]);
+unset($_SESSION["id"]);
+
+header("Location: ../views/login.php");
+die();
+   
 ?>
