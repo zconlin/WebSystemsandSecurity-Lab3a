@@ -12,6 +12,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <!-- Add an appropriate title in this tag -->
   <title>Lab 1</title>
 
